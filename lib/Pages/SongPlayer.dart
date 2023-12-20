@@ -30,6 +30,8 @@ class _SongPlayerState extends State<SongPlayer> with SingleTickerProviderStateM
     super.initState();
 
     //just for debugging
+    print("Mode pdf: " + mode.pdfPath);
+    print("Mode audio: " + mode.audioPath);
     print("Time stamps for this mode: " + mode.turnTimeStamps.toString());
     print("Turns for this mode: " + mode.turnPages.toString());
 
@@ -37,11 +39,11 @@ class _SongPlayerState extends State<SongPlayer> with SingleTickerProviderStateM
     MainPlayer.stop();
 
     //give player url from mode
-    MainPlayer.loadURL(mode.audioLink);
+    MainPlayer.loadFile(mode.audioPath);
     print(MainPlayer.isPlaying);
 
     iconController = AnimationController(vsync: this, duration: const Duration(milliseconds: 1000));
-    _pdfController = PdfController(document: PdfDocument.openData(InternetFile.get(mode.pdfLink)));
+    _pdfController = PdfController(document: PdfDocument.openAsset(("data/" + mode.pdfPath).replaceAll(" ", "")));
   }
 
   @override

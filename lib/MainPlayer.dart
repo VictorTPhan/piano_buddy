@@ -8,12 +8,12 @@ class MainPlayer
   static bool isLoaded = false;
   static bool isPlaying = false;
 
-  /// Loads a URL into the player. Automatically set to not autoplay.
-  static Future<void> loadURL(String URL) async
+  /// Loads a file into the player. Automatically set to not autoplay.
+  static Future<void> loadFile(String path) async
   {
     isLoaded = false;
     player.setVolume(1);
-    player.open(Audio.network(URL), autoStart: false).
+    player.open(Audio(("assets/data/" + path).replaceAll(" ", "")), autoStart: false).
     then((value) {
       print("AUDIO PLAYER LOADED");
       isLoaded = true;
